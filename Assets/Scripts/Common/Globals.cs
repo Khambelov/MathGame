@@ -9,6 +9,11 @@ public class Globals : MonoBehaviour
 
     public bool activate = false;
 
+    public Record bestPlayers;
+
+    private string nickName;
+    public string Name { get { return nickName; } set { nickName = value; } }
+
     private string mode = null;
     public string Mode { get { return mode; } set { mode = value; } }
 
@@ -33,6 +38,11 @@ public class Globals : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+
+        if (Preload.preload)
+        {
+            Preload.preload.globalIsReady = true;
         }
     }
 }

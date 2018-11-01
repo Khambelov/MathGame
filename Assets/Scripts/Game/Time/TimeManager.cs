@@ -11,10 +11,13 @@ public class TimeManager : MonoBehaviour
     public Text prepareText;
     public Text gameTimeText;
 
+    public int sessionTime;
+    public float speed;
+
     float prepareTime = 4f;
     int time = 60;
     public int gameTime { get { return time; } set { time = value; } }
-    string prepare = "Get Ready!";
+    string prepare = Localization.GetLoc.GetLocById(10);
 
     private void Awake()
     {
@@ -25,6 +28,8 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         gameTimeText.text = "01 : 00";
+        sessionTime = 0;
+        prepareText.text = prepare;
         StartCoroutine(StartTimer());
     }
 
@@ -63,7 +68,7 @@ public class TimeManager : MonoBehaviour
         int minutes = 0;
         int seconds = 0;
 
-        while (time > -1)
+        while (time > 0)
         {
             minutes = time / 60;
             seconds = time - (minutes != 0 ? (60 * minutes) : 0);
@@ -72,7 +77,15 @@ public class TimeManager : MonoBehaviour
                 gameTimeText.text = string.Concat(minutes < 10 ? "0" : "", minutes, " : ", seconds < 10 ? "0" : "", seconds);
             else
                 gameTimeText.text = "00 : 00";
+
             time--;
+            sessionTime++;
+
+            if (sessionTime == 59)
+            {
+                speed = ((float)AnswersManager.game.rightAnswers / (float)sessionTime);
+                speed = ((int)(speed * 100)) / 100f;
+            }
 
             yield return new WaitForSeconds(1f);
         }

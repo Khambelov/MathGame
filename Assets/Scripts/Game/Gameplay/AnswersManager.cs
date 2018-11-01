@@ -47,12 +47,12 @@ public class AnswersManager : MonoBehaviour
         wrongCombo = 0;
 
         border.color = new Color(0, 255, 0, 1);
-        problemText.text = "Right!";
+        problemText.text =  Localization.GetLoc.GetLocById(12);
 
         if (rightCombo == 5)
         {
             rightCombo = 0;
-            TimeManager.timer.gameTime += 10;
+            TimeManager.timer.gameTime += 5;
             TimeManager.timer.ChangeNewTime();
         }
 
@@ -69,7 +69,7 @@ public class AnswersManager : MonoBehaviour
         rightCombo = 0;
 
         border.color = new Color(255, 0, 0, 1);
-        problemText.text = "Wrong!";
+        problemText.text = Localization.GetLoc.GetLocById(13);
 
         if (wrongCombo == 3)
         {

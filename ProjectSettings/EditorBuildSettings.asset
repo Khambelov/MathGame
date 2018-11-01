@@ -6,8 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Preload.unity
+    guid: afd3f04352474eb47a693063d371e2ad
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 4888413fc0b45144e83f578b8bd9e4c4
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 1fe40688ae793e440b28a70179ee2d92
+  m_configObjects: {}

@@ -19,12 +19,14 @@ public class GamePause : MonoBehaviour
     public void StartPause()
     {
         darker.SetActive(true);
+        darker.GetComponent<Animator>().SetTrigger("pause");
         TimeManager.timer.StopAllCoroutines();
         sound.Pause();
     }
 
     public void ExitGame()
     {
-        SceneManager.LoadSceneAsync(0);
+        Localization.GetLoc.texts = new List<LoadLocText>();
+        SceneManager.LoadScene(1);
     }
 }

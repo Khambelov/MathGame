@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,13 +18,13 @@ public class MainMenu : MonoBehaviour
 
         window.isOn = PlayerPrefs.GetInt("windowStg") == 1 ? true : false;
         Screen.fullScreen = window.isOn;
-        //window.isOn = PlayerPrefs.GetInt("windowStg") == 1 ? true : false;
     }
 
     public void Play(string mode)
     {
         Globals.global.Mode = mode;
-        SceneManager.LoadSceneAsync(1);
+        Localization.GetLoc.texts = new List<LoadLocText>();
+        SceneManager.LoadSceneAsync(2);
     }
 
     public void AudioMode()
@@ -38,6 +39,16 @@ public class MainMenu : MonoBehaviour
         Screen.fullScreen = window.isOn ? true : false;
         Globals.global.Window = window;
         PlayerPrefs.SetInt("windowStg", window.isOn ? 1 : 0);
+    }
+
+    public void Language()
+    {
+        if ((int)Localization.GetLoc.CurrentLang < Enum.GetNames(typeof(Lang)).Length - 1)
+            Localization.GetLoc.CurrentLang++;
+        else
+            Localization.GetLoc.CurrentLang = 0;
+
+        PlayerPrefs.SetInt("lang", (int)Localization.GetLoc.CurrentLang);
     }
 
     public void Quit()
